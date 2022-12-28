@@ -31,11 +31,56 @@ const App = () => {
 		}
 	}
 
+	const handleRemNumber = () => {
+		if (firstNumber === '0') {
+			setFirstNumber(String(currentNumber));
+			setCurrentNumber('0')
+			setOperation('-')
+		} else {
+			const rem = Number(firstNumber) - Number(currentNumber)
+			setCurrentNumber(String(rem));
+			setOperation('')
+		}
+	}
+
+	const hendleDivNumber = () => {
+		if (firstNumber === '0') {
+			setFirstNumber(String(currentNumber));
+			setCurrentNumber('0')
+			setOperation('/')
+		} else {
+			const div = Number(firstNumber) / Number(currentNumber)
+			setCurrentNumber(String(div));
+			setOperation('')
+		}
+	}
+
+	const handleMultNumber = () => {
+		if (firstNumber === '0') {
+			setFirstNumber(String(currentNumber));
+			setCurrentNumber('0')
+			setOperation('x')
+		} else {
+			const mult = Number(firstNumber) * Number(currentNumber)
+			setCurrentNumber(String(mult));
+			setOperation('')
+		}
+	}
+
 	const handleEquals = () => {
 		if (firstNumber !== '0' && operation !== '' && currentNumber !== '0') {
 			switch (operation) {
 				case '+':
 					handleSumNumber();
+					break;
+				case '-':
+					handleRemNumber();
+					break;
+				case '/':
+					hendleDivNumber();
+					break;
+				case 'x':
+					handleMultNumber();
 					break;
 				default:
 					break;
@@ -50,7 +95,7 @@ const App = () => {
 					<Button label="7" onClick={() => handleAddNumber('7')} />
 					<Button label="8" onClick={() => handleAddNumber('8')} />
 					<Button label="9" onClick={() => handleAddNumber('9')} />
-					<Button label="-" onClick={() => handleAddNumber('')} />
+					<Button label="-" onClick={handleRemNumber} />
 				</Row>
 				<Row>
 					<Button label="5" onClick={() => handleAddNumber('4')} />
@@ -66,9 +111,9 @@ const App = () => {
 				</Row>
 				<Row>
 					<Button label="0" onClick={() => handleAddNumber('0')} />
-					<Button label="/" />
+					<Button label="/" onClick={hendleDivNumber} />
 					<Button label="C" onClick={handleOnClear} />
-					<Button label="X" />
+					<Button label="X" onClick={handleMultNumber} />
 				</Row>
 			</Content>
 		</Container>
